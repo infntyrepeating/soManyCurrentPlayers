@@ -2,6 +2,9 @@ let firstItem = null;
 let secondItem = null;
 let items = [];
 
+let firstPlayerCount = 0;
+let secondPlayerCount = 0;
+
 const firstItemElement = document.getElementById('first-item');
 const secondItemElement = document.getElementById('second-item');
 const firstImgElement = document.getElementById('first-img');
@@ -56,31 +59,43 @@ async function startNewRound() {
   }
   console.log('Second item:', secondItem);
 
-  const firstPlayerCount = await getPlayerCount(firstItem);
-  const secondPlayerCount = await getPlayerCount(secondItem);
+  if (!firstItem || !secondItem) {
+    console.error('Invalid items or appid');
+    console.error('First item:', firstItem);
+    console.error('Second item:', secondItem);
+    return;
+  }
 
-  const firstGameDetails = await getGameDetails(firstItem);
-  const secondGameDetails = await getGameDetails(secondItem);
+  firstPlayerCount = await getPlayerCount(firstItem);
+  secondPlayerCount = await getPlayerCount(secondItem);
+  console.log('First player count:', firstPlayerCount);
+  console.log('Second player count:', secondPlayerCount);
 
-  const firstImageUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${firstItem}/header.jpg`;
-  const secondImageUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${secondItem}/header.jpg`;
+  try {
+    const firstGameDetails = await getGameDetails(firstItem);
+    const secondGameDetails = await getGameDetails(secondItem);
 
-  firstImgElement.src = firstImageUrl;
-  firstTitleElement.textContent = firstGameDetails.name;
-  firstValueElement.textContent = `Players: ${firstPlayerCount}`;
+    const firstImageUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${firstItem}/header.jpg`;
+    const secondImageUrl = `https://cdn.akamai.steamstatic.com/steam/apps/${secondItem}/header.jpg`;
 
-  secondImgElement.src = secondImageUrl;
-  secondTitleElement.textContent = secondGameDetails.name;
-  secondValueElement.classList.add('hidden');
-  secondValueElement.textContent = `Players: ${secondPlayerCount}`;
+    firstImgElement.src = firstImageUrl;
+    firstTitleElement.textContent = firstGameDetails.name;
+    firstValueElement.textContent = `Players: ${firstPlayerCount}`;
 
-  firstItem.playerCount = firstPlayerCount;
-  secondItem.playerCount = secondPlayerCount;
+    secondImgElement.src = secondImageUrl;
+    secondTitleElement.textContent = secondGameDetails.name;
+    secondValueElement.classList.add('hidden');
+    secondValueElement.textContent = `Players: ${secondPlayerCount}`;
 
-  resultElement.textContent = '';
-  nextRoundButton.classList.add('hidden');
-  higherButton.disabled = false;
-  lowerButton.disabled = false;
+    resultElement.textContent = '';
+    nextRoundButton.classList.add('hidden');
+    higherButton.disabled = false;
+    lowerButton.disabled = false;
+  } catch (error) {
+    console.error('Error fetching game details:', error);
+    resultElement.textContent = 'Error fetching game details. Please try again later.';
+    resultElement.style.color = 'red';
+  }
 }
 
 function revealSecondValue() {
@@ -92,7 +107,10 @@ function checkGuess(isHigher) {
   higherButton.disabled = true;
   lowerButton.disabled = true;
 
-  if ((isHigher && secondItem.playerCount > firstItem.playerCount) || (!isHigher && secondItem.playerCount < firstItem.playerCount)) {
+  console.log('First player count:', firstPlayerCount);
+  console.log('Second player count:', secondPlayerCount);
+
+  if ((isHigher && secondPlayerCount > firstPlayerCount) || (!isHigher && secondPlayerCount < firstPlayerCount)) {
     resultElement.textContent = 'Correct!';
     resultElement.style.color = 'green';
   } else {
