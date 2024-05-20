@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>How Many Current Players</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="description" content="">
 
@@ -22,31 +22,30 @@
 </head>
 
 <body>
-<div class="container">
-  <h1>Higher or Lower Game</h1>
-  <div class="game">
-    <div class="item-display">
-      <div id="first-item" class="item">
-        <img id="first-img" src="" alt="">
-        <div id="first-title"></div>
-        <div id="first-value"></div>
-      </div>
-      <div id="second-item" class="item">
-        <img id="second-img" src="" alt="">
-        <div id="second-title"></div>
-        <div id="second-value" class="hidden"></div>
-      </div>
+<div id="start-screen">
+  <img id="logo" src="img/logo.png" alt="Logo">
+  <button id="play-btn">Play</button>
+</div>
+<div id="game-screen" class="hidden">
+  <div id="game-container">
+    <div id="first-item">
+      <img id="first-img" src="" alt="First Game Image">
+      <h2 id="first-title"></h2>
+      <p id="first-value"></p>
     </div>
-    <div class="controls">
-      <button id="higher-btn">Higher</button>
-      <button id="lower-btn">Lower</button>
+    <div id="second-item">
+      <img id="second-img" src="" alt="Second Game Image">
+      <h2 id="second-title"></h2>
+      <p id="second-value" class="hidden"></p>
     </div>
-    <div id="result" class="result"></div>
+  </div>
+  <div id="result"></div>
+  <div id="buttons">
     <button id="next-round-btn" class="hidden">Next Round</button>
+    <button id="higher-btn">Higher</button>
+    <button id="lower-btn">Lower</button>
   </div>
 </div>
   <script src="js/app.js"></script>
-
 </body>
-
 </html>
