@@ -22,6 +22,7 @@
 </head>
 
 <body>
+<div id="loading-screen" class="hidden">Loading...</div>
 <div id="start-screen">
   <img id="logo" src="img/logo.png" alt="Logo">
   <button id="play-btn">Play</button>
@@ -41,11 +42,13 @@
   </div>
   <div id="result"></div>
   <div id="buttons">
+    <p id="comparison-text" class="hidden">Does <span id="game2-name"></span> have more or less player than <span id="game1-name"></span>?</p>
     <button id="next-round-btn" class="hidden">Next Round</button>
-    <button id="higher-btn">Higher</button>
-    <button id="lower-btn">Lower</button>
+    <button id="higher-btn" class="hidden">More</button>
+    <button id="lower-btn" class="hidden">Less</button>
   </div>
 </div>
-  <script src="js/app.js"></script>
+<script src="js/app.js"></script>
 </body>
+
 </html>

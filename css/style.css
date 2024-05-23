@@ -16,6 +16,18 @@ body {
   display: none;
 }
 
+#loading-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+}
+
 #start-screen {
   display: flex;
   flex-direction: column;
@@ -24,7 +36,7 @@ body {
 }
 
 #logo {
-  width: 500px; /* Adjust the size as needed */
+  width: 300px; /* Adjust the size as needed */
   animation: fadein 2s;
 }
 
@@ -71,12 +83,31 @@ button:hover {
   position: absolute;
 }
 
+#first-img,
+#second-img {
+  width: 200px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+#first-value,
+#second-value{
+  margin-top: -15px; /* Adjust the margin as needed */
+}
+
+#second-item {
+  margin-top: 30px; /* Adjust the margin as needed */
+}
+
+#comparison-text{
+  margin-top: 40px;
+  font-size: 13px;
+  padding: 20px;
+}
+
 .second-item {
   position: absolute;
 }
 
-.buttons{
+.buttons {
   position: absolute;
 }
-
-
